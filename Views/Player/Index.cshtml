@@ -1,0 +1,74 @@
+﻿@model List<Tournament>
+
+    <link rel="stylesheet" href="~/css/app.css" />
+
+<div class="container mt-4">
+
+    <h2 class="mb-4" style="color: antiquewhite">My Dashboard</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Wins</h5>
+                    <h3>@ViewBag.Wins</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Losses</h5>
+                    <h3>@ViewBag.Losses</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Draws</h5>
+                    <h3>@ViewBag.Draws</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Win Rate</h5>
+                    <h3>@ViewBag.WinRate%</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a asp-controller="Player" asp-action="Tournaments" class="btn btn-primary mb-3">Browse Tournaments</a>
+    <a asp-controller="Player" asp-action="MyMatches" class="btn btn-primary mb-3">My matches</a>
+
+    <h3 style="color: antiquewhite;">My Tournaments</h3>
+
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You haven't joined any tournaments yet.
+        </div>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var t in Model)
+            {
+                <li class="list-group-item">
+                    <strong>@t.Name</strong><br/>@t.Description
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+
+
+
+
+
+

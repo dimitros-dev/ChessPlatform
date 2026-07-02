@@ -1,0 +1,47 @@
+﻿body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/images/chess.jpg"), url("/images/chessPattern.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: contain, auto;
+    background-position: center, center;
+    background-attachment: fixed;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient( ellipse at center, transparent 50%, rgba(0,0,0,0.75) 75% );
+    pointer-events: none;
+    }
+.auth-container {
+    margin: auto;
+    width: 500px;
+    height: 750px;
+    padding: 25px;
+    border-radius: 30px;
+    background-color: hsla(30, 65%, 28%, 0.9);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.auth-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.auth-button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px;
+    background: #4caf50;
+    border: none;
+    color: white;
+}
+a {
+    color: #ffd700;
+}

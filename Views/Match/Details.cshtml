@@ -1,0 +1,46 @@
+﻿@model Match
+
+<link rel="stylesheet" href="~/css/app.css"/>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4" style="color:antiquewhite;">Match Details</h2>
+
+    <div class="card">
+        <div class="card-body">
+
+            <p><strong>Player 1:</strong> @Model.Player1.UserName</p>
+            <p><strong>Player 2:</strong> @Model.Player2.UserName</p>
+
+            <p>
+                <strong>Status:</strong>
+                @(Model.IsFinished ? "Finished" : "Active")
+            </p>
+
+            <p>
+                <strong>Result:</strong>
+                @(Model.Result ?? "-")
+            </p>
+
+            @if (!Model.IsFinished)
+            {
+                <hr />
+
+                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="WhiteWin" 
+                    class="btn btn-success me-2">
+                    White Wins
+                </a>
+
+                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="BlackWin" 
+                    class="btn btn-danger me-2">
+                    Black Wins
+                </a>
+
+                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="Draw" class="btn btn-secondary">
+                    Draw
+                </a>
+            }
+        </div>
+    </div>
+</div>
+            

@@ -1,0 +1,18 @@
+﻿body {
+    background-image: url('/images/wood.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.btn {
+    margin-right: 10px;
+}

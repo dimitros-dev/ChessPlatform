@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <h2>Admin Panel</h2>
+}
+else if (User.IsInRole("Organizer"))
+{
+    <h2>Organizer Dashboard</h2>
+}
+else if (User.IsInRole("Player"))
+{
+    <h2>Player Home</h2>
+}

@@ -1,0 +1,65 @@
+﻿@model List<Match>
+
+    <link rel="stylesheet" href="~/css/app.css"/>
+
+@{
+    var userId = ViewBag.UserId as string;
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4" style="color:antiquewhite;">My Matches</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You don't have any matches yet.
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Opponent</th>
+                            <th>Color</th>
+                            <th>Status</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var match in Model)
+                        {
+                            var isPlayer1 = match.Player1Id == userId;
+
+                            <tr>
+                                <td>
+                                    @(isPlayer1? match.Player2.UserName : match.Player1.UserName)
+                                </td>
+
+                                <td>
+                                    @(isPlayer1 ? "White" : "Black")
+                                </td>
+
+                                <td>
+                                    @(match.IsFinished ? "Finished" : "Active")
+                                </td>
+
+                                <td>
+                                    @match.Result
+                                </td>
+                                <td>
+                                    <a asp-controller="Match" asp-action="Details" asp-route-id="@match.Id"
+                                               class="btn btn-sm btn-primary">Open</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
