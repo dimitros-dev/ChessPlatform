@@ -24,7 +24,7 @@ namespace ChessPlatform.Controllers
         }
         public async Task<IActionResult> Users()
         {
-            var users = _userManager.Users.ToList();
+            var users = await _userManager.Users.ToListAsync();
             var userList = new List<(ApplicationUser User, IList<string> Roles)>();
 
             foreach(var user in users)
@@ -37,6 +37,14 @@ namespace ChessPlatform.Controllers
         }
         public async Task<IActionResult> ChangeRole(string userId, string role)
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+           
+            if (currentUser.Id == userId)
+            {
+                return BadRequest("You cannot change your role.");
+            }
+
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)
@@ -66,6 +74,7 @@ namespace ChessPlatform.Controllers
                 .Where(x => x.PlayerId == id);
 
             _context.TournamentPlayers.RemoveRange(tournamentPlayers);
+
             var matches = _context.Matches
                 .Where(x => x.Player1Id == id || x.Player2Id == id);
 
@@ -96,11 +105,24 @@ namespace ChessPlatform.Controllers
         {
             var tournament = await _context.Tournaments.FirstOrDefaultAsync(t => t.Id == id);
 
-            if(tournament != null)
+            if (tournament == null)
             {
-                _context.Tournaments.Remove(tournament);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
+
+            var tournamentPlayers = _context.TournamentPlayers
+                .Where(tp => tp.TournamentId == id);
+
+            _context.TournamentPlayers.RemoveRange(tournamentPlayers);
+
+            var matches = _context.Matches.Where(m => m.TournamentId == id);
+
+            _context.Matches.RemoveRange(matches);
+
+            _context.Tournaments.Remove(tournament);
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Tournaments");
         }
     }

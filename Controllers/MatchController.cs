@@ -1,5 +1,6 @@
 ﻿using ChessPlatform.Data;
 using ChessPlatform.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ namespace ChessPlatform.Controllers
 
             return View(match);
         }
+        [Authorize]
         public async Task<IActionResult> SetResult(int id, string result)
         {
             var match = await _context.Matches.FindAsync(id);
