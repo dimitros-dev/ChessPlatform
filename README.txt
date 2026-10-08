@@ -1,43 +1,48 @@
 # ChessPlatform
 
-ASP.NET Core MVC aplikacija za upravljanje šahovskim turnirima, korisnicima i mečevima.
+ASP.NET Core MVC application for managing chess tournaments, users, and matches.
 
-## Tehnologije
-- ASP.NET Core MVC
-- Entity Framework Core
-- ASP.NET Core Identity
-- SQL Server
-- Bootstrap
+## Technologies
 
-## Login podaci (test nalog)
+* ASP.NET Core MVC
+* Entity Framework Core
+* ASP.NET Core Identity
+* SQL Server
+* Bootstrap
+
+## Login Credentials (Test Accounts)
 
 ### Administrator
-- Username: Admin
-- Password: Admin123!
 
-### Organizer 
-- Username: Ivana
-- Password: Ivana12345%
+* Username: Admin
+* Password: Admin123!
+
+### Organizer
+
+* Username: MagnusGM
+* Password: Magnus123!
 
 ### Players
-- Username: Mina
-- Password: Mina12321!
 
-- Username: Aleksa
-- Password: Aleksa5678*
+* Username: GothamChess
+* Password: Gotham123!
 
+* Username: Sindarov
+* Password: Javokhir123!
 
-## Dokumentacija
+## Documentation
 
-- Seminarski rad se nalazi u folderu: /seminarski
-- SQL skripta baze se nalazi u folderu: /database
+* The final project documentation is located in the `/seminarski` folder.
+* The SQL database script is located in the `/database` folder.
 
-## Opis projekta
+## Project Description
 
-Sistem omogućava:
-- registraciju i prijavu korisnika
-- kreiranje i upravljanje turnirima
-- prijavu igrača na turnire
-- automatsko generisanje mečeva
-- unos i praćenje rezultata
-- administratorsko upravljanje korisnicima i turnirima
+The system provides:
+
+* user registration and login
+* tournament creation and management
+* player registration for tournaments
+* automatic match generation
+* match result entry and tracking
+* administrative management of users and tournaments
+* tournament leaderboard
