@@ -1,51 +1,136 @@
 ﻿@model List<Tournament>
 
-	<link rel="stylesheet" href="~/css/app.css"/>
+<link rel="stylesheet" href="~/css/app.css" />
 
 @{
-	var joinedIds = ViewBag.JoinedIds as List<int>;
+    var joinedIds = ViewBag.JoinedIds as List<int>;
 }
-<div class="container mt-4">
 
-	<h2 style="color:antiquewhite">Available tournaments</h2>
+<div class="player-tournaments-page">
 
-	<div class="card">
-		<div class="card-body p-0">
+    <div class="player-tournaments-header">
+        <h1>Available Tournaments</h1>
+        <p>Find a tournament and join your next chess challenge.</p>
+    </div>
 
-			<table class="table table-hover mb-0">
-				<thead class ="table-dark">
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach(var tournament in Model)
-					{
-						<tr>
-							<td>@tournament.Name</td>
-							<td>@tournament.Description</td>
-							<td>
-								@if (joinedIds != null && joinedIds.Contains(tournament.Id))
-								{
-									<span class="text-success">Joined</span>
-									<a asp-controller="Tournament" asp-action="Leave" asp-route-id="@tournament.Id"
-										class="btn btn-sm btn-danger">
-										Leave
-									</a>
-								}
-								else{
-									<a asp-controller="Tournament" asp-action="Join" asp-route-id="@tournament.Id"
-										class="btn btn-sm btn-primary">
-										Join
-									</a>
-								}
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
-	</div>
+    @if (!Model.Any())
+    {
+        <div class="player-tournaments-empty">
+
+            <div class="player-tournaments-empty-icon">♟</div>
+            <h2>No tournaments available</h2>
+            <p>There are currently no tournaments available to join.</p>
+        </div>
+    }
+    else
+    {
+        <div class="available-tournaments-grid">
+
+            @foreach (var tournament in Model)
+            {
+                <div class="available-tournament-card">
+                    <div class="available-tournament-header">
+                        <div>
+                            <h2>@tournament.Name</h2>
+                            <p>@tournament.Description</p>
+                        </div>
+
+                        <div class="available-tournament-icon">
+
+                            @if (tournament.TournamentType == "Classical")
+                            {
+                                <span title="Classical">🐢</span>
+                            }
+                            else if (tournament.TournamentType == "Rapid")
+                            {
+                                <span title="Rapid">🐇</span>
+                            }
+                            else if (tournament.TournamentType == "Blitz")
+                            {
+                                <span title="Blitz">⚡</span>
+                            }
+                            else if (tournament.TournamentType == "Bullet")
+                            {
+                                <span title="Bullet">🔫</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="available-tournament-details">
+
+                        <div>
+                            <span class="detail-label">Type</span>
+                            <strong>@tournament.TournamentType</strong>
+                        </div>
+
+                        <div>
+                            <span class="detail-label">Start</span>
+                            <strong>
+                                @tournament.StartDate.ToShortDateString()
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span class="detail-label">End</span>
+                            <strong>
+                                @tournament.EndDate.ToShortDateString()
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <div class="available-tournament-footer">
+
+                        @if (joinedIds != null && joinedIds.Contains(tournament.Id))
+                        {
+                            <span class="joined-tournament-status">
+                                ✓ Joined
+                            </span>
+
+                            @if (!tournament.IsStarted)
+                            {
+                                <form asp-controller="Tournament" asp-action="Leave" method="post">
+
+                                    <input type="hidden" name="id" value="@tournament.Id" />
+
+                                    <button type="submit" class="tournament-leave-button">
+                                        Leave Tournament
+                                    </button>
+
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-controller="Tournament"
+                                   asp-action="Standings"
+                                   asp-route-id="@tournament.Id"
+                                   class="tournament-standings-button">
+                                    View Standings
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span class="available-status">Available</span>
+
+                            <form asp-controller="Tournament" asp-action="Join" method="post">
+
+                                <input type="hidden" name="id" value="@tournament.Id" />
+
+                                <button type="submit" class="tournament-join-button">
+                                    Join Tournament
+                                </button>
+
+                            </form>
+                        }
+
+                        </div>
+
+                    </div>
+            }
+
+        </div>
+    }
+
 </div>
+

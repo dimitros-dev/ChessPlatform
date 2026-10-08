@@ -1,18 +1,1716 @@
 ﻿body {
-    background-image: url('/images/wood.avif');
+    background-image: url('/images/wood.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-.card {
-    background-color: rgba(255, 255, 255, 0.9);
+/*---------ADMIN DASHBOARD-----------*/
+
+.admin-page {
+    min-height: 80vh;
+    padding-top: 70px;
 }
 
-.container {
-    margin-top: 30px;
+.admin-header {
+    margin-bottom: 55px;
 }
 
-.btn {
+.admin-header h1 {
+    color: #5a3a22;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+.admin-header p {
+    color: #5a3a22;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+.admin-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.admin-card {
+    width: 340px;
+    min-height: 330px;
+    padding: 35px 30px;
+    text-align: center;
+    background-color: rgba(245, 225, 195, 0.95);
+    color: #4a3424;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+.admin-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.admin-card h2 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.admin-card p {
+    min-height: 65px;
+    color: #5a4634;
+    line-height: 1.6;
+}
+
+.admin-card-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 11px 24px;
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.admin-card-button:hover {
+    background-color: #402817;
+    color: #fff;
+}
+
+/*-----------ADMIN USERS-----------*/
+
+.admin-users-page {
+    min-height: 80vh;
+    padding: 50px 30px;
+}
+.admin-section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.admin-section-header h1 {
+    color: #5a3a22;
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.admin-section-header p {
+    color: #5a3a22;
+    font-size: 1.05rem;
+    font-weight: bolder;
+}
+.users-table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #f3e4c5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #4a3424;
+}
+
+.users-table thead {
+    background-color: #4a2f1b;
+    color: #f3e4c5;
+}
+
+.users-table th {
+    padding: 17px 16px;
+    text-align: left;
+    font-weight: 700;
+    border: none;
+}
+
+.users-table td {
+    padding: 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #d8bd99;
+}
+
+.users-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.users-table tbody tr:hover {
+    background-color: #ead5b5;
+}
+
+.users-table tbody tr:last-child td {
+border-bottom: none;
+}
+.username-cell {
+    font-weight: 600;
+}
+.user-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: #6b4729;
+    color: #f3e4c5;
+    font-size: 1rem;
+}
+.role-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    margin-right: 4px;
+    border-radius: 8px;
+    background-color: #6b4729;
+    color: #f3e4c5;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.role-button {
+    display: inline-block;
+    padding: 5px 9px;
+    margin: 2px;
+    border: 1px solid #b8956d;
+    border-radius: 6px;
+    background-color: #ead5b5;
+    color: #5a3a22;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.role-button:hover {
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    border-color: #5a3a22;
+}
+.delete-button {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #9b3d32;
+    border-radius: 6px;
+    color: #9b3d32;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.delete-button:hover {
+    background-color: #9b3d32;
+    color: white;
+}
+/*---------ADMIN TOURNAMENTS---------*/
+
+.admin-tournaments-page {
+    min-height: 80vh;
+    padding: 50px 30px;
+}
+.admin-tournaments-page .admin-section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.admin-tournaments-page .admin-section-header h1 {
+    color: #5a3a22;
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.admin-tournaments-page .admin-section-header p {
+   color: #5a3a22;
+   font-size: 1.05rem;
+}
+.tournaments-table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #f3e4c5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+.tournaments-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #4a3424;
+}
+.tournaments-table thead {
+    background-color: #5a3a22;
+    color: #f3e4c5;
+}
+.tournaments-table th {
+    padding: 17px 16px;
+    text-align: left;
+    font-weight: 700;
+    border: none;
+}
+.tournaments-table td {
+    padding: 17px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #d8bd99;
+}
+.tournaments-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+.tournaments-table tbody tr:hover {
+    background-color: #ead5b5;
+}
+.tournaments-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.tournament-name {
+    font-weight: 700;
+}
+
+.tournament-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    font-size: 1rem;
+}
+.tournament-description {
+    max-width: 400px;
+    color: #5a4634;
+}
+.tournaments-table .delete-button {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #9b3d32;
+    border-radius: 6px;
+    color: #9b3d32;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.tournaments-table .delete-button:hover {
+    background-color: #9b3d32;
+    color: white;
+}
+.tournament-type-icon {
+    font-size: 2.5rem;
+    text-align: center;
+    width: 80px;
+}
+.tournament-type-icon span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.tournament-type-icon span:hover {
+    transform: scale(1.2);
+}
+
+/*----------ORGANIZER TOURNAMENTS---------*/
+
+.organizer-tournaments-page {
+    min-height: 80vh;
+    padding: 50px 30px;
+}
+.organizer-tournaments-header {
+    max-width: 1250px;
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+.organizer-tournaments-header h1 {
+    color: #5a3a22;
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.organizer-tournaments-header p {
+    color: #5a3a22;
+    font-size: 1.05rem;
+    margin: 0;
+}
+.create-tournament-button {
+    display: inline-block;
+    padding: 12px 22px;
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+}
+.create-tournament-button:hover {
+    background-color: #402817;
+    color: #fff;
+    transform: translateY(-2px);
+}
+.organizer-tournaments-table-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #f3e4c5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    overflow-x: auto;
+}
+.organizer-tournaments-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #4a3424;
+}
+.organizer-tournaments-table thead {
+    background-color: #5a3a22;
+    color: #f3e4c5;
+}
+.organizer-tournaments-table th {
+    padding: 17px 15px;
+    text-align: left;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.organizer-tournaments-table td {
+    padding: 16px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #d8bd99;
+}
+.organizer-tournaments-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+.organizer-tournaments-table tbody tr:hover {
+    background-color: #ead5b5;
+}
+.organizer-tournaments-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.tournament-name-cell {
+    font-weight: 700;
+    white-space: nowrap;
+}
+.tournament-description-cell {
+    max-width: 300px;
+    color: #5a4634;
+}
+.tournament-type-cell {
+    white-space: nowrap;
+}
+.tournament-type-icon {
+    font-size: 2rem;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+.tournament-type-icon:hover {
+    transform: scale(1.2);
+}
+.tournament-type-name {
+    margin-left: 6px;
+    font-weight: 600;
+}
+.tournament-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.tournament-status.not-started {
+    background-color: #ead5b5;
+    color: #7a551f;
+}
+.tournament-status.started {
+    background-color: #d5e8d4;
+    color: #356b35;
+}
+.tournament-actions {
+    white-space: nowrap;
+}
+.tournament-action-button {
+    display: inline-block;
+    padding: 7px 11px;
+    margin: 2px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.start-button {
+    background-color: #4f7d45;
+    color: white;
+    border: 1px solid #4f7d45;
+}
+.start-button:hover {
+    background-color: #3d6336;
+    border-color: #3d6336;
+}
+.standings-button {
+    background-color: #6b4729;
+    color: #f3e4c5;
+    border: 1px solid #6b4729;
+}
+.standings-button:hover {
+    background-color: #4a2f1b;
+    color: #fff;
+}
+.tournament-action-button.delete-button {
+    background-color: transparent;
+    color: #9b3d32;
+    border: 1px solid #9b3d32;
+}
+.tournament-action-button.delete-button:hover {
+    background-color: #9b3d32;
+    color: white;
+}
+.empty-tournaments-card {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 50px 30px;
+    text-align: center;
+    background-color: rgba(243, 228, 197, 0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    color: #4a3424;
+}
+.empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+.empty-tournaments-card h2 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.empty-tournaments-card p {
+    color: #5a4634;
+    margin-bottom: 25px;
+}
+
+/*------CREATE TOURNAMENT------*/ 
+
+.create-tournament-page {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 45px 20px;
+}
+.create-tournament-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 38px 42px;
+    background-color: #f3e4c5;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    color: #4a3424;
+}
+.create-tournament-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+.create-tournament-header h1 {
+    color: #5a3a22;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.create-tournament-header p {
+    color: #765b42;
+    margin: 0;
+}
+.create-form-group {
+    margin-bottom: 20px;
+}
+.create-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #5a3a22;
+    font-weight: 700;
+}
+.create-form-input {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #c4a77f;
+    border-radius: 8px;
+    background-color: #fffaf0;
+    color: #4a3424;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.create-form-input:focus {
+    border-color: #5a3a22;
+    box-shadow: 0 0 0 3px rgba(90, 58, 34, 0.15);
+    background-color: #fffdf7;
+}
+.create-description {
+    min-height: 110px;
+    resize: vertical;
+}
+.create-select {
+    cursor: pointer;
+}
+.create-date-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+.create-validation {
+    display: block;
+    margin-top: 5px;
+    color: #a33a32;
+    font-size: 0.9rem;
+}
+.create-validation-summary {
+    margin-bottom: 18px;
+}
+.create-submit-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.create-submit-button:hover {
+    background-color: #402817;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+
+}
+
+@media (max-width: 650px) {
+    .create-tournament-card {
+        padding: 30px 22px;
+    }
+
+    .create-date-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .create-tournament-header h1 {
+        font-size: 1.9rem;
+    }
+}
+/*---------PLAYER DASHBOARD----------*/
+
+.player-dashboard-page {
+    min-height: 85vh;
+    padding: 45px 30px;
+}
+
+.player-dashboard-header {
+    max-width: 1200px;
+    margin: 0 auto 35px;
+}
+    .player-dashboard-header h1 {
+        color: #5a3a22;
+        font-size: 2.7rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .player-dashboard-header p {
+        color: #5a3a22;
+        font-size: 1.05rem;
+        margin: 0;
+        font-weight: bold;
+    }
+.player-statistics {
+    max-width: 1200px;
+    margin: 0 auto 35px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.player-stat-card {
+    padding: 22px;
+    background-color: #f3e4c5;
+    border-radius: 15px;
+    text-align: center;
+    color: #5a3a22;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+.player-stat-card:hover {
+    transform: translateY(-4px);
+}
+.player-stat-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+.player-stat-card span {
+    display: block;
+    color: #765b42;
+    font-weight: 600;
+}
+.player-stat-card strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 2rem;
+}
+.player-dashboard-actions {
+    max-width: 1200px;
+    margin: 0 auto 45px;
+    display: flex;
+    gap: 15px;
+}
+.player-dashboard-button {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.player-dashboard-button.primary {
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.player-dashboard-button.primary:hover {
+    background-color: #402817;
+    color: white;
+    transform: translateY(-2px);
+}
+.player-dashboard-button.secondary {
+    background-color: #f3e4c5;
+    color: #5a3a22;
+    border: 1px solid #c4a77f;
+}
+.player-dashboard-button.secondary:hover {
+    background-color: #ead5b5;
+    transform: translateY(-2px);
+}
+.player-tournaments-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.player-section-header {
+    margin-bottom: 20px;
+}
+    .player-section-header h2 {
+        color: #5a3a22;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+    .player-section-header p {
+        color: #5a3a22;
+        margin: 0;
+        font-weight: bold;
+    }
+.player-tournaments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.player-tournament-card {
+    padding: 24px;
+    background-color: #f3e4c5;
+    border-radius: 15px;
+    color: #4a3424;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.player-tournament-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+.player-tournament-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+.player-tournament-card h3 {
+    color: #5a3a22;
+    font-size: 1.3rem;
+    margin-bottom: 7px;
+}
+.player-tournament-card p {
+    color: #765b42;
+    margin: 0;
+}
+.player-tournament-icon {
+    font-size: 2.6rem;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+.player-tournament-icon:hover {
+    transform: scale(1.15);
+}
+.player-tournament-info {
+    display: flex;
+    gap: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #d8bd99;
+    color: #765b42;
+    font-size: 0.9rem;
+}
+.player-tournament-status {
+    margin-top: 18px;
+}
+.player-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.player-status.started {
+    background-color: #d5e8d4;
+    color: #356b35;
+}
+.player-status.not-started {
+    background-color: #ead5b5;
+    color: #7a551f;
+}
+.player-empty-card {
+    padding: 45px 30px;
+    background-color: rgba(243, 228, 197, 0.95);
+    border-radius: 17px;
+    text-align: center;
+    color: #4a3424;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.player-empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+}
+.player-empty-card h3 {
+    color: #5a3a22;
+    margin-bottom: 8px;
+}
+.player-empty-card p {
+    max-width: 500px;
+    margin: 0 auto 25px;
+    color: #765b42;
+}
+@media (max-width: 850px) {
+.player-statistics {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .player-tournaments-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .player-dashboard-page {
+        padding: 30px 18px;
+    }
+
+    .player-dashboard-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .player-statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .player-dashboard-actions {
+        flex-direction: column;
+    }
+
+    .player-dashboard-button {
+        text-align: center;
+    }
+}
+/*------------PLAYER TOURNAMENTS-----------*/
+
+.player-tournaments-page {
+    min-height: 85vh;
+    padding: 45px 30px;
+}
+.player-tournaments-header {
+    max-width: 1200px;
+    margin: 0 auto 35px;
+}
+
+    .player-tournaments-header h1 {
+        color: #5a3a22;
+        font-size: 2.7rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .player-tournaments-header p {
+        color: #5a3a22;
+        font-size: 1.05rem;
+        margin: 0;
+    }
+.available-tournaments-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+.available-tournament-card {
+    padding: 25px;
+    background-color: #f3e4c5;
+    border-radius: 16px;
+    color: #4a3424;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .available-tournament-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 11px 27px rgba(0, 0, 0, 0.4);
+    }
+
+.available-tournament-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+    .available-tournament-header h2 {
+        color: #5a3a22;
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    .available-tournament-header p {
+        color: #765b42;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+.available-tournament-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+    .available-tournament-icon:hover {
+        transform: scale(1.15);
+    }
+
+.available-tournament-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid #d8bd99;
+    border-bottom: 1px solid #d8bd99;
+}
+
+    .available-tournament-details > div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+.detail-label {
+    color: #8a6d50;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.available-tournament-details strong {
+    color: #5a3a22;
+    font-size: 0.9rem;
+}
+
+.available-tournament-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-top: 18px;
+}
+
+.available-status,
+.joined-tournament-status {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.available-status {
+    color: #765b42;
+}
+.joined-tournament-status {
+    color: #356b35;
+    background-color: #d5e8d4;
+    padding: 6px 10px;
+    border-radius: 7px;
+}
+
+.tournament-join-button {
+    padding: 9px 17px;
+    border: none;
+    border-radius: 7px;
+    background-color: #5a3a22;
+    color: #f3e4c5;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .tournament-join-button:hover {
+        background-color: #402817;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+.tournament-leave-button {
+    padding: 9px 17px;
+    border: 1px solid #9b3d32;
+    border-radius: 7px;
+    background-color: transparent;
+    color: #9b3d32;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .tournament-leave-button:hover {
+        background-color: #9b3d32;
+        color: white;
+    }
+
+.player-tournaments-empty {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 50px 30px;
+    text-align: center;
+    background-color: rgba(243, 228, 197, 0.95);
+    border-radius: 18px;
+    color: #4a3424;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.player-tournaments-empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.player-tournaments-empty h2 {
+    color: #5a3a22;
+    margin-bottom: 10px;
+}
+
+.player-tournaments-empty p {
+    color: #765b42;
+    margin: 0;
+}
+.tournament-standings-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border-radius: 8px;
+    background-color: #5a3a22;
+    color: #fff8e7;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+    .tournament-standings-button:hover {
+        background-color: #3f2817;
+        color: #fff8e7;
+        transform: translateY(-1px);
+    }
+
+
+@media (max-width: 850px) {
+
+    .available-tournaments-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .player-tournaments-page {
+        padding: 30px 18px;
+    }
+
+    .player-tournaments-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .available-tournament-details {
+        grid-template-columns: 1fr;
+    }
+
+    .available-tournament-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tournament-join-button,
+    .tournament-leave-button {
+        width: 100%;
+    }
+}
+/*-------------STANDINGS-------------*/
+
+.standings-page {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 20px;
+}
+.standings-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 30px;
+    color: #5a3a22;
+}
+.standings-header-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 3.2rem;
+}
+.standings-header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+.standings-header p {
+    margin: 6px 0 0;
+    color: #5a3a22;
+    font-size: 1rem;
+}
+.standings-card {
+    background: #f3e4c5;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #4a3424;
+}
+
+    .standings-table thead {
+        background: #5a3a22;
+        color: #f3e4c5;
+    }
+
+    .standings-table th {
+        padding: 18px 16px;
+        text-align: center;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+        .standings-table th:nth-child(2) {
+            text-align: left;
+        }
+
+    .standings-table td {
+        padding: 17px 16px;
+        text-align: center;
+        border-bottom: 1px solid rgba(90, 58, 34, 0.15);
+    }
+
+    .standings-table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .standings-table tbody tr:hover {
+            background-color: #ead8b5;
+        }
+
+        .standings-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+.standings-position {
+    width: 70px;
+    font-weight: 700;
+}
+
+.position-medal {
+    font-size: 1.5rem;
+}
+
+.position-number {
+    font-size: 1.05rem;
+    color: #6b5138;
+}
+
+.standings-player {
+    text-align: left !important;
+}
+
+.player-piece {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 1.5rem;
     margin-right: 10px;
+    vertical-align: middle;
 }
+
+.standings-player strong {
+    font-size: 1.05rem;
+}
+
+.stat-win {
+    font-weight: 700;
+}
+
+.stat-draw {
+    font-weight: 700;
+}
+
+.stat-loss {
+    font-weight: 700;
+}
+
+.standings-points {
+    font-size: 1.15rem;
+    color: #5a3a22;
+}
+
+@media (max-width: 768px) {
+
+    .standings-page {
+        margin-top: 25px;
+        padding: 0 10px;
+    }
+
+    .standings-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .standings-header-icon {
+        font-size: 2.5rem;
+    }
+
+    .standings-card {
+        overflow-x: auto;
+    }
+
+    .standings-table {
+        min-width: 700px;
+    }
+}
+/*---------MY MATCHES------------*/
+.my-matches-page {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 20px;
+}
+.my-matches-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 30px;
+    color: #5a3a22;
+}
+.my-matches-header-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 3.2rem;
+}
+.my-matches-header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #5a3a22;
+}
+.my-matches-header p {
+    margin: 6px 0 0;
+    color: #5a3a22;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.my-matches-card {
+    background: #f3e4c5;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+.my-matches-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #4a3424;
+}
+
+    .my-matches-table thead {
+        background: #5a3a22;
+        color: #f3e4c5;
+    }
+
+    .my-matches-table th {
+        padding: 18px 16px;
+        text-align: center;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+        .my-matches-table th:first-child {
+            text-align: left;
+        }
+
+    .my-matches-table td {
+        padding: 17px 16px;
+        text-align: center;
+        border-bottom: 1px solid rgba(90, 58, 34, 0.15);
+    }
+
+    .my-matches-table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .my-matches-table tbody tr:hover {
+            background-color: #ead8b5;
+        }
+
+        .my-matches-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+.match-opponent {
+    text-align: left !important;
+}
+.match-player-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.match-color {
+    font-weight: 700;
+}
+
+    .match-color.white {
+        color: #6b5138;
+    }
+
+    .match-color.black {
+        color: #3d2a1c;
+    }
+
+.match-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+    .match-status.finished {
+        background: #d9c29a;
+        color: #5a3a22;
+    }
+
+    .match-status.active {
+        background: #ead8b5;
+        color: #5a3a22;
+    }
+
+.match-result {
+    font-weight: 700;
+}
+.result-pending {
+    font-size: 1.3rem;
+    color: #8d755a;
+}
+.match-open-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #5a3a22;
+    color: #f3e4c5;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+    .match-open-button:hover {
+        background: #4a3424;
+        color: #fff4d8;
+        transform: translateY(-1px);
+    }
+
+.my-matches-empty {
+    background: #f3e4c5;
+    border-radius: 18px;
+    padding: 55px 30px;
+    text-align: center;
+    color: #4a3424;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.my-matches-empty-icon {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+.my-matches-empty h2 {
+    margin-bottom: 8px;
+}
+
+.my-matches-empty p {
+    margin-bottom: 25px;
+    color: #6b5138;
+}
+
+.my-matches-button {
+    display: inline-block;
+    padding: 11px 22px;
+    background: #5a3a22;
+    color: #f3e4c5;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+    .my-matches-button:hover {
+        background: #4a3424;
+        color: #fff4d8;
+    }
+
+@media (max-width: 768px) {
+
+    .my-matches-page {
+        margin-top: 25px;
+        padding: 0 10px;
+    }
+
+    .my-matches-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .my-matches-header-icon {
+        font-size: 2.5rem;
+    }
+
+    .my-matches-card {
+        overflow-x: auto;
+    }
+
+    .my-matches-table {
+        min-width: 850px;
+    }
+}
+
+/*--------MATCH DETAILS-------*/
+
+.match-details-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.match-details-header {
+    text-align: center;
+    color: #5a3a22;
+    margin-bottom: 35px;
+}
+
+    .match-details-header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .match-details-header p {
+        margin-top: 8px;
+        color: #5a3a22;
+        font-size: 1rem;
+    }
+
+.match-board-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 55px;
+}
+
+.match-board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #5a3a22;
+    font-size: 1.2rem;
+}
+
+.top-player {
+    margin-bottom: 12px;
+}
+
+.bottom-player {
+    margin-top: 12px;
+}
+
+.match-piece {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 1.8rem;
+}
+
+.chessboard {
+    width: 520px;
+    height: 520px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 10px solid #4a3424;
+    border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+.chess-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 3.1rem;
+    user-select: none;
+}
+    .chess-square.light {
+        background: #ead8b5;
+    }
+
+    .chess-square.dark {
+        background: #8b6345;
+    }
+
+.match-side-panel {
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.match-clock {
+    background: #f3e4c5;
+    border-radius: 14px;
+    padding: 18px 15px;
+    text-align: center;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+.clock-label {
+    display: block;
+    color: #6b5138;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.clock-time {
+    background: #4a3424;
+    color: #f3e4c5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Courier New", monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.match-status-card {
+    background: #f3e4c5;
+    border-radius: 14px;
+    padding: 18px 15px;
+    text-align: center;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+
+    .match-status-card span {
+        display: block;
+        color: #6b5138;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+    }
+
+    .match-status-card strong {
+        color: #5a3a22;
+        font-size: 1.1rem;
+    }
+
+.match-result-section {
+    margin: 40px auto 0;
+    max-width: 850px;
+    background: #f3e4c5;
+    border-radius: 18px;
+    padding: 25px 30px;
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+    color: #4a3424;
+}
+
+    .match-result-section h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .match-result-section p {
+        margin: 6px 0 20px;
+        color: #6b5138;
+    }
+
+.match-result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+    .match-result-buttons form {
+        margin: 0;
+    }
+
+.match-result-button {
+    min-width: 170px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 9px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .match-result-button.white-win {
+        background: #ead8b5;
+        color: #4a3424;
+    }
+
+        .match-result-button.white-win:hover {
+            background: #dfcba8;
+            transform: translateY(-2px);
+        }
+
+    .match-result-button.draw-result {
+        background: #8b735a;
+        color: #f3e4c5;
+    }
+
+        .match-result-button.draw-result:hover {
+            background: #735c46;
+            transform: translateY(-2px);
+        }
+
+    .match-result-button.black-win {
+        background: #4a3424;
+        color: #f3e4c5;
+    }
+
+        .match-result-button.black-win:hover {
+            background: #382719;
+            transform: translateY(-2px);
+        }
+
+.finished-result strong {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 22px;
+    background: #d9c29a;
+    border-radius: 10px;
+    color: #5a3a22;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+
+    .match-board-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .match-side-panel {
+        width: 520px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .match-clock,
+    .match-status-card {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .match-details-page {
+        margin-top: 25px;
+        padding: 0 10px;
+    }
+
+    .match-details-header h1 {
+        font-size: 1.9rem;
+    }
+
+    .chessboard {
+        width: 90vw;
+        height: 90vw;
+        max-width: 420px;
+        max-height: 420px;
+        border-width: 6px;
+    }
+
+    .chess-square {
+        font-size: 2.3rem;
+    }
+
+    .match-side-panel {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .match-result-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .match-result-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+
+
+
+

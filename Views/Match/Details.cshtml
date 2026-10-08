@@ -1,46 +1,191 @@
 ﻿@model Match
 
-<link rel="stylesheet" href="~/css/app.css"/>
+<link rel="stylesheet" href="~/css/app.css" />
 
-<div class="container mt-4">
+<div class="match-details-page">
 
-    <h2 class="mb-4" style="color:antiquewhite;">Match Details</h2>
-
-    <div class="card">
-        <div class="card-body">
-
-            <p><strong>Player 1:</strong> @Model.Player1.UserName</p>
-            <p><strong>Player 2:</strong> @Model.Player2.UserName</p>
-
-            <p>
-                <strong>Status:</strong>
-                @(Model.IsFinished ? "Finished" : "Active")
-            </p>
-
-            <p>
-                <strong>Result:</strong>
-                @(Model.Result ?? "-")
-            </p>
-
-            @if (!Model.IsFinished)
-            {
-                <hr />
-
-                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="WhiteWin" 
-                    class="btn btn-success me-2">
-                    White Wins
-                </a>
-
-                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="BlackWin" 
-                    class="btn btn-danger me-2">
-                    Black Wins
-                </a>
-
-                <a asp-action="SetResult" asp-route-id="@Model.Id" asp-route-result="Draw" class="btn btn-secondary">
-                    Draw
-                </a>
-            }
-        </div>
+    <div class="match-details-header">
+        <h1>Match Details</h1>
+        <p>Match between @Model.Player1.UserName and @Model.Player2.UserName.</p>
     </div>
+
+    <div class="match-board-layout">
+
+        <div class="match-board-section">
+
+            <div class="match-player top-player">
+                <span class="match-piece">♚</span>    
+                <strong>@Model.Player2.UserName</strong>
+            </div>
+
+            <div class="chessboard">
+
+                <div class="chess-square dark">♜</div>
+                <div class="chess-square light">♞</div>
+                <div class="chess-square dark">♝</div>
+                <div class="chess-square light">♛</div>
+                <div class="chess-square dark">♚</div>
+                <div class="chess-square light">♝</div>
+                <div class="chess-square dark">♞</div>
+                <div class="chess-square light">♜</div>
+
+                <div class="chess-square light">♟</div>
+                <div class="chess-square dark">♟</div>
+                <div class="chess-square light">♟</div>
+                <div class="chess-square dark">♟</div>
+                <div class="chess-square light">♟</div>
+                <div class="chess-square dark">♟</div>
+                <div class="chess-square light">♟</div>
+                <div class="chess-square dark">♟</div>
+
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+                <div class="chess-square light"></div>
+                <div class="chess-square dark"></div>
+
+                <div class="chess-square dark">♙</div>
+                <div class="chess-square light">♙</div>
+                <div class="chess-square dark">♙</div>
+                <div class="chess-square light">♙</div>
+                <div class="chess-square dark">♙</div>
+                <div class="chess-square light">♙</div>
+                <div class="chess-square dark">♙</div>
+                <div class="chess-square light">♙</div>
+
+                <div class="chess-square light">♖</div>
+                <div class="chess-square dark">♘</div>
+                <div class="chess-square light">♗</div>
+                <div class="chess-square dark">♕</div>
+                <div class="chess-square light">♔</div>
+                <div class="chess-square dark">♗</div>
+                <div class="chess-square light">♘</div>
+                <div class="chess-square dark">♖</div>
+
+            </div>
+
+            <div class="match-player bottom-player">
+                <span class="match-piece">♔</span>
+                <strong>@Model.Player1.UserName</strong>
+            </div>
+
+        </div>
+
+        <div class="match-side-panel">
+
+            <div class="match-clock">
+                <span class="clock-label">Black</span>
+                <div class="clock-time">
+                    @($"{ViewBag.TimeControlMinutes:00}:00")
+                </div>
+            </div>
+
+            <div class="match-clock">
+                <span class="clock-label">White</span>
+                <div class="clock-time">
+                    @($"{ViewBag.TimeControlMinutes:00}:00")
+                </div>
+            </div>
+
+            <div class="match-status-card">
+                <span>Status</span>
+                <strong>
+                    @(Model.IsFinished ? "Finished" : "Active")
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    @if (!Model.IsFinished)
+    {
+        <div class="match-result-section">
+
+            <h2>Match Result</h2>
+            <p>Select the result of the match.</p>
+
+            <div class="match-result-buttons">
+
+                <form asp-action="SetResult" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="result" value="WhiteWin" />
+
+                    <button type="submit" class="match-result-button white-win">
+                        ♔ White Wins
+                    </button>
+                </form>
+
+                <form asp-action="SetResult" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="result" value="Draw" />
+
+                    <button type="submit" class="match-result-button draw-result">
+                        ½ Draw
+                    </button>
+                </form>
+
+                <form asp-action="SetResult" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="result" value="BlackWin" />
+
+                    <button type="submit" class="match-result-button black-win">
+                        ♚ Black Wins
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="match-result-section finished-result">
+
+            <h2>Match Result</h2>
+
+            <strong>
+                @(Model.Result == "WhiteWin"
+                    ? "White Wins"
+                    : Model.Result == "BlackWin"
+                        ? "Black Wins"
+                        : "Draw")
+            </strong>
+
+        </div>
+    }
+
 </div>
+
+
             

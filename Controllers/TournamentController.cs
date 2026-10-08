@@ -2,6 +2,7 @@
 using ChessPlatform.Data;
 using ChessPlatform.Models;
 using ChessPlatform.Repositories;
+using ChessPlatform.Services;
 using ChessPlatform.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,12 +17,14 @@ namespace ChessPlatform.Controllers
         private readonly ChessPlatformContext _context;
         private readonly ITournamentRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ITournamentService _tournamentService;
         public TournamentController(ChessPlatformContext context,UserManager<ApplicationUser> userManager,
-                                    ITournamentRepository repository)
+                                    ITournamentRepository repository, ITournamentService tournamentService)
         {
             _context = context;
             _userManager = userManager;
             _repository = repository;
+            _tournamentService = tournamentService;
         }
         [Authorize(Roles = "Organizer")]
         public IActionResult Create()
@@ -40,13 +43,19 @@ namespace ChessPlatform.Controllers
             {
                 Name = vm.Name,
                 Description = vm.Description,
+                TournamentType = vm.TournamentType,
+                TimeControlMinutes = vm.TimeControlMinutes,
                 StartDate = vm.StartDate,
                 EndDate = vm.EndDate,
                 CreatedById = _userManager.GetUserId(User)
             };
 
-            _context.Tournaments.Add(tournament);
-            await _context.SaveChangesAsync();
+            var created = await _tournamentService.CreateTournamentAsync(tournament);
+            if (!created)
+            {
+                ModelState.AddModelError("", "End date must be after the start date");
+                return View(vm);
+            }
 
             return RedirectToAction("Index");
         }
@@ -58,113 +67,69 @@ namespace ChessPlatform.Controllers
 
             return View(tournaments);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Player")]
         public async Task<IActionResult> Join(int id)
         {
             var userId = _userManager.GetUserId(User);
-            var alreadyJoined = await _context.TournamentPlayers
-                                .AnyAsync(tp => tp.TournamentId == id && tp.PlayerId == userId);
 
-            if (!alreadyJoined)
+            var joined = await _tournamentService.JoinTournamentAsync(id, userId);
+
+            if (!joined)
             {
-                var tournamentPlayer = new TournamentPlayer
-                {
-                    TournamentId = id,
-                    PlayerId = userId
-                };
-
-                _context.TournamentPlayers.Add(tournamentPlayer);
-                await _context.SaveChangesAsync();
+                return Content("You cannot join this tournament");
             }
+
             return RedirectToAction("Index", "Player");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Player")]
         public async Task<IActionResult> Leave(int id)
         {
             var userId = _userManager.GetUserId(User);
 
-            var record = await _context.TournamentPlayers
-                .FirstOrDefaultAsync(tp => tp.TournamentId == id && tp.PlayerId == userId);
+            await _tournamentService.LeaveTournamentAsync(id, userId);
 
-            if (record != null)
-            {
-                _context.TournamentPlayers.Remove(record);
-                await _context.SaveChangesAsync();
-            }
             return RedirectToAction("Tournaments", "Player");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Organizer")]
         public async Task<IActionResult> Delete(int id)
         {
             var userId = _userManager.GetUserId(User);
 
-            var tournament = await _context.Tournaments
-                .FirstOrDefaultAsync(t => t.Id == id && t.CreatedById == userId);
-
-            if (tournament != null)
-            {
-                var players = _context.TournamentPlayers
-                    .Where(x => x.TournamentId == id);
-
-                _context.TournamentPlayers.RemoveRange(players);
-
-                var matches = _context.Matches
-                    .Where(x => x.TournamentId == id);
-
-                _context.Matches.RemoveRange(matches);
-                _context.Tournaments.Remove(tournament);
-
-                await _context.SaveChangesAsync();
-            }
+            await _tournamentService.DeleteTournamentAsync(id, userId);
 
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Organizer")]
         public async Task<IActionResult> Start(int id)
         {
             var userId = _userManager.GetUserId(User);
 
-            var tournament = await _context.Tournaments.
-                            FirstOrDefaultAsync(t => t.Id == id && t.CreatedById == userId);
+            //await _tournamentService.StartTournamentAsync(id, userId);
+            var started = await _tournamentService.StartTournamentAsync(id, userId);
 
-            var playerCount = await _context.TournamentPlayers.CountAsync(tp => tp.TournamentId == id);
-
-            var players = await _context.TournamentPlayers.Where(tp => tp.TournamentId == id)
-                                                          .Select(tp => tp.PlayerId).ToListAsync();
-
-            if (tournament == null)
+            if (!started)
             {
-                return NotFound();
+                return Content("Tournament could not be started.");
             }
-
-            if (playerCount < 2)
-            {
-                return Content("At least 2 players are required");
-            }
-
-            tournament.IsStarted = true;
-
-            _context.Tournaments.Update(tournament);
-
-            for (int i = 0; i < players.Count; i += 2)
-            {
-                var match = new Match
-                {
-                    TournamentId = id,
-                    Player1Id = players[i],
-                    Player2Id = players[i + 1],
-                    IsFinished = false
-                };
-
-                _context.Matches.Add(match);
-            }
-            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
+
+            //return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Standings(int id)
+        {
+            var standings = await _tournamentService.GetStandingsAsync(id);
+
+            return View(standings);
         }
 
     }

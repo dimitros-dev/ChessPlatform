@@ -1,51 +1,79 @@
 ﻿@model List<(ApplicationUser User, IList<string> Roles)>
 
 @{
-	ViewData["BodyClass"] = "admin-users";
+    ViewData["BodyClass"] = "admin-users";
 }
-<link rel="stylesheet" href="~/css/app.css"/>
 
-<div class="container mt-4">
+<link rel="stylesheet" href="~/css/app.css" />
 
-	<h1 class="mb-4" style="color:antiquewhite">Users </h1>
+<div class="admin-users-page">
+    <div class="admin-section-header">
+        <h1>Users</h1>
+        <p>Manage registered users and their roles.</p>
+    </div>
+    <div class="users-table-container">
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Current Role</th>
+                    <th>Change Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 
-	<div class="card">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="username-cell">
+                            <span class="user-icon">♟</span>
+                            @item.User.UserName
+                        </td>
 
-		<table class="table table-hover mb-0">
-			<thead class ="table-dark">
-			<tr>
-				<th>Username</th>
-				<th>Email</th>
-				<th>Roles</th>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
+                        <td>
+                            @item.User.Email
+                        </td>
 
-		@foreach(var item in Model){
-			<tr>
-				<td>@item.User.UserName</td>
-				<td>@item.User.Email</td>
-					
-				<td>
-					@foreach(var role in item.Roles)
-					{
-						<span class="badge bg-primary me-1">@role</span>		
-					}
-				</td>
-				<td>
-					<a href="/Admin/ChangeRole?userId=@item.User.Id&role=Admin">Admin only</a>|
-					<a href="/Admin/ChangeRole?userId=@item.User.Id&role=Organizer">Organizer only</a>|
-					<a href="/Admin/ChangeRole?userId=@item.User.Id&role=Player">Player only</a>
-				
-				</td>
-				<td>
-					<a asp-action="DeleteUser" asp-route-id="@item.User.Id" class="text-danger"
-								   onclick="return confirm('Delete this user?')">Delete</a>
-				</td>
-			</tr>
-		}
-			</tbody>
-		</table>
-	</div>
+                        <td>
+                            @foreach (var role in item.Roles)
+                            {
+                                <span class="role-badge">
+                                    @role
+                                </span>
+                            }
+                        </td>
+                        <td>
+
+                            <a asp-action="ChangeRole" asp-route-userId="@item.User.Id" asp-route-role="Admin" class="role-button">                            
+                                Admin
+                            </a>
+
+                            <a asp-action="ChangeRole" asp-route-userId="@item.User.Id" asp-route-role="Organizer" class="role-button">                            
+                                Organizer
+                            </a>
+
+                            <a asp-action="ChangeRole" asp-route-userId="@item.User.Id" asp-route-role="Player" class="role-button">
+                                Player
+                            </a>
+
+                        </td>
+
+                        <td>
+                            <a asp-action="DeleteUser" asp-route-id="@item.User.Id" class="delete-button" onclick="return confirm('Delete this user?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (TempData["Error"] != null)
+        {
+            <script>
+                alert("@TempData["Error"]");
+            </script>
+        }
+    </div>
 </div>

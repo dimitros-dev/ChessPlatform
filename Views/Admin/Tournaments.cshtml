@@ -1,40 +1,61 @@
 ﻿@model List<Tournament>
 
+@{
+    ViewData["BodyClass"] = "admin-tournaments";
+}
+
 <link rel="stylesheet" href="~/css/app.css" />
-         
-<div class="container mt-4">
 
-    <h2 class ="mb-4" style="color:antiquewhite">All Tournaments</h2>
+<div class="admin-tournaments-page">
 
-    <div class="card">
-        <div class="card-body p-0">
+    <div class="admin-section-header">
+        <h1>All Tournaments</h1>
+        <p>View and manage tournaments created on the platform.</p>
+    </div>
 
-            <table class ="table table-hover mb-0">
-                <thead class="table-dark">
+    <div class="tournaments-table-container">
+        <table class="tournaments-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Created By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var t in Model)
+                {
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Created By</th>
-                        <th>Actions</th>
+
+                        <td class="tournament-name">
+                            <span class="tournament-icon">♟</span>
+                            @t.Name
+                        </td>
+
+                        <td class="tournament-description">
+                            @t.Description
+                        </td>
+
+                        <td>
+                            @t.CreatedBy.UserName
+                        </td>
+
+                        <td>
+                            <a asp-action="DeleteTournament"
+                               asp-route-id="@t.Id"
+                               class="delete-button"
+                               onclick="return confirm('Delete this tournament?')">
+                                Delete
+                            </a>
+                        </td>
+
                     </tr>
-                </thead>
+                }
 
-                <tbody>
-                    @foreach (var t in Model)
-                    {
-                        <tr>
-                            <td>@t.Name</td>
-                            <td>@t.Description</td>
-                            <td>@t.CreatedBy.UserName</td>
-                            <td>
-                                <a asp-action="DeleteTournament" asp-route-id="@t.Id" class="text-danger"
-                                               onclick="return confirm('Delete this tournament?')">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-     </div>
+            </tbody>
+        </table>
+    </div>
 </div>

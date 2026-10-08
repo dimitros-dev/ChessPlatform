@@ -42,7 +42,8 @@ namespace ChessPlatform.Controllers
            
             if (currentUser.Id == userId)
             {
-                return BadRequest("You cannot change your role.");
+                TempData["Error"] = "You cannot change your own role.";
+                return RedirectToAction("Users");
             }
 
             var user = await _userManager.FindByIdAsync(userId);

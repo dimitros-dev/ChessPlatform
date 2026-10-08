@@ -1,6 +1,7 @@
 ﻿using ChessPlatform.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace ChessPlatform.Data
 {
@@ -26,6 +27,21 @@ namespace ChessPlatform.Data
                 .HasOne(tp => tp.Player)
                 .WithMany()
                 .HasForeignKey(tp => tp.PlayerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<TournamentPlayer>()
+                   .HasIndex(tp => new { tp.TournamentId, tp.PlayerId })
+                   .IsUnique();
+            builder.Entity<Match>()
+                    .HasOne(m => m.Player1)
+                    .WithMany()
+                    .HasForeignKey(m => m.Player1Id)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Match>()
+                .HasOne(m => m.Player2)
+                .WithMany()
+                .HasForeignKey(m => m.Player2Id)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     } 

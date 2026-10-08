@@ -1,74 +1,159 @@
 ﻿@model List<Tournament>
 
-    <link rel="stylesheet" href="~/css/app.css" />
+<link rel="stylesheet" href="~/css/app.css" />
 
-<div class="container mt-4">
+<div class="player-dashboard-page">
 
-    <h2 class="mb-4" style="color: antiquewhite">My Dashboard</h2>
-
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5>Wins</h5>
-                    <h3>@ViewBag.Wins</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5>Losses</h5>
-                    <h3>@ViewBag.Losses</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5>Draws</h5>
-                    <h3>@ViewBag.Draws</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5>Win Rate</h5>
-                    <h3>@ViewBag.WinRate%</h3>
-                </div>
-            </div>
+    <div class="player-dashboard-header">
+        <div>
+            <h1>Player Dashboard</h1>
+            <p>Track your chess performance and manage your tournaments.</p>
         </div>
     </div>
 
-    <a asp-controller="Player" asp-action="Tournaments" class="btn btn-primary mb-3">Browse Tournaments</a>
-    <a asp-controller="Player" asp-action="MyMatches" class="btn btn-primary mb-3">My matches</a>
+    <div class="player-statistics">
 
-    <h3 style="color: antiquewhite;">My Tournaments</h3>
-
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            You haven't joined any tournaments yet.
+        <div class="player-stat-card">
+            <div class="player-stat-icon">♕</div>
+            <span>Wins</span>
+            <strong>@ViewBag.Wins</strong>
         </div>
-    }
-    else
-    {
-        <ul class="list-group">
-            @foreach (var t in Model)
-            {
-                <li class="list-group-item">
-                    <strong>@t.Name</strong><br/>@t.Description
-                </li>
-            }
-        </ul>
-    }
+
+        <div class="player-stat-card">
+            <div class="player-stat-icon">♟</div>
+            <span>Losses</span>
+            <strong>@ViewBag.Losses</strong>
+        </div>
+
+        <div class="player-stat-card">
+            <div class="player-stat-icon">½</div>
+            <span>Draws</span>
+            <strong>@ViewBag.Draws</strong>
+        </div>
+
+        <div class="player-stat-card">
+            <div class="player-stat-icon">%</div>
+            <span>Win Rate</span>
+            <strong>@ViewBag.WinRate%</strong>
+        </div>
+
+    </div>
+
+    <div class="player-dashboard-actions">
+
+        <a asp-controller="Player" asp-action="Tournaments" class="player-dashboard-button primary">
+            Browse Tournaments
+        </a>
+        <a asp-controller="Player" asp-action="MyMatches" class="player-dashboard-button secondary">
+            My Matches
+        </a>
+
+    </div>
+
+    <div class="player-tournaments-section">
+
+        <div class="player-section-header">
+            <div>
+                <h2>My Tournaments</h2>
+                <p>Tournaments you have joined.</p>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="player-empty-card">
+
+                <div class="player-empty-icon">♟</div>
+
+                <h3>No tournaments yet</h3>
+
+                <p>
+                    You haven't joined any tournaments yet.
+                    Browse available tournaments and join your first one.
+                </p>
+
+                <a asp-controller="Player" asp-action="Tournaments" class="player-dashboard-button primary">
+                    Browse Tournaments
+                </a>
+
+            </div>
+        }
+        else
+        {
+            <div class="player-tournaments-grid">
+
+                @foreach (var t in Model)
+                {
+                    <div class="player-tournament-card">
+
+                        <div class="player-tournament-card-top">
+
+                            <div>
+                                <h3>@t.Name</h3>
+                                <p>@t.Description</p>
+                            </div>
+
+                            <div class="player-tournament-icon">
+
+                                @if (t.TournamentType == "Classical")
+                                {
+                                    <span title="Classical">🐢</span>
+                                }
+                                else if (t.TournamentType == "Rapid")
+                                {
+                                    <span title="Rapid">🐇</span>
+                                }
+                                else if (t.TournamentType == "Blitz")
+                                {
+                                    <span title="Blitz">⚡</span>
+                                }
+                                else if (t.TournamentType == "Bullet")
+                                {
+                                    <span title="Bullet">🔫</span>
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div class="player-tournament-info">
+
+                            <span>
+                                <strong>Start:</strong>
+                                @t.StartDate.ToShortDateString()
+                            </span>
+
+                            <span>
+                                <strong>End:</strong>
+                                @t.EndDate.ToShortDateString()
+                            </span>
+
+                        </div>
+
+                        <div class="player-tournament-status">
+
+                            @if (t.IsStarted)
+                            {
+                                <span class="player-status started">
+                                    Started
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="player-status not-started">
+                                    Not started
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+    </div>
+
 </div>
-
-
-
-
-
-
 

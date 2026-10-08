@@ -2,42 +2,86 @@
 
 <link rel="stylesheet" href="~/css/app.css" />
 
-<div class="container mt-4">
+<div class="create-tournament-page">
 
-    <h2 class ="mb-4" style="color:antiquewhite">Create Tournament</h2>
+    <div class="create-tournament-card">
 
-    <form asp-action="Create" method="post" class="card p-4 shadow-sm">
-
-        <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="create-tournament-header">
+            <h1>Create Tournament</h1>
+            <p>Set up your tournament and choose its format.</p>
         </div>
 
+        <form asp-action="Create" method="post">
 
-        <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+            <div class="create-form-group">
+                <label asp-for="Name">Tournament Name</label>
+                <input asp-for="Name" class="create-form-input" placeholder="Enter tournament name" />
+                <span asp-validation-for="Name" class="create-validation"></span>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Start Date</label>
-            <input asp-for="StartDate" type="date" class="form-control" />
-            <span asp-validation-for="StartDate" class="text-danger"></span>
-        </div>
+            <div class="create-form-group">
+                <label asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="create-form-input create-description"
+                          placeholder="Describe your tournament"></textarea>
+                <span asp-validation-for="Description" class="create-validation"></span>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">End Date</label>
-            <input asp-for="EndDate" type="date" class="form-control" />
-            <span asp-validation-for="EndDate" class="text-danger"></span>
-        </div>
+            <div class="create-form-group">
+                <label asp-for="TournamentType">Tournament Type</label>
 
-        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                <select asp-for="TournamentType" class="create-form-input create-select">
 
+                    <option value="">Select tournament type</option>
+                    <option value="Rapid">Rapid</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Blitz">Blitz</option>
+                    <option value="Bullet">Bullet</option>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+                </select>
 
-        <div asp-validation-summary="All"></div>
-    </form>
+                <span asp-validation-for="TournamentType" class="create-validation"></span>
+            </div>
+
+            <div class="create-form-group">
+                <label asp-for="TimeControlMinutes">Time Control</label>
+
+                <select asp-for="TimeControlMinutes" class="create-form-input create-select">
+                    <option value="">Select time control</option>
+                    <option value="1">1 minut</option>
+                    <option value="3">3 minutes</option>
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="60">60 minutes</option>
+                </select>
+
+                <span asp-validation-for="TimeControlMinutes" class="create-validation"></span>
+            </div>
+
+            <div class="create-date-row">
+
+                <div class="create-form-group">
+                    <label asp-for="StartDate">Start Date</label>
+                    <input asp-for="StartDate" type="date" class="create-form-input" />
+                    <span asp-validation-for="StartDate" class="create-validation"></span>
+                </div>
+
+                <div class="create-form-group">
+                    <label asp-for="EndDate">End Date</label>
+                    <input asp-for="EndDate" type="date" class="create-form-input" />
+                    <span asp-validation-for="EndDate" class="create-validation"></span>
+                </div>
+
+            </div>
+
+            <div asp-validation-summary="All" class="create-validation create-validation-summary"></div>
+
+            <button type="submit" class="create-submit-button">Create Tournament</button>
+
+        </form>
+
+    </div>
+
 </div>
+

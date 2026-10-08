@@ -23,20 +23,33 @@ namespace ChessPlatform.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var userId = _userManager.GetUserId(User);
-            var match = await _context.Matches
-                .FirstOrDefaultAsync(m => m.Id == id && (m.Player1Id == userId || m.Player2Id == userId));
 
-            var matches = await _context.Matches.Include(m => m.Player1).Include(m => m.Player2)
-            .Where(m => m.Player1Id == userId || m.Player2Id == userId)
-            .ToListAsync();
+            var match = await _context.Matches
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
+                .FirstOrDefaultAsync(m =>
+                    m.Id == id &&
+                    (m.Player1Id == userId || m.Player2Id == userId));
 
             if (match == null)
             {
                 return NotFound();
             }
 
+            var tournament = await _context.Tournaments
+                .FirstOrDefaultAsync(t => t.Id == match.TournamentId);
+
+            if (tournament == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.TimeControlMinutes = tournament.TimeControlMinutes;
+
             return View(match);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> SetResult(int id, string result)
         {

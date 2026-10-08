@@ -18,6 +18,8 @@ html {
 }
 
 body {
+  background-image: url("/images/wood.jpg");
+  background-size: cover;
   margin-bottom: 60px;
 }
 
@@ -29,3 +31,161 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+.chess-navbar {
+    background-color: #5a3a22;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.chess-navbar .navbar-brand {
+    color: #f3e4c5;
+    font-weight: 700;
+}
+.chess-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f3e4c5 !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+.chess-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    margin: -5px 0;
+}
+.home-hero {
+    padding-top: 45px;
+    padding-bottom: 20px;
+}
+
+.home-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.home-description {
+    max-width: 650px;
+    margin: 15px auto 0;
+    font-size: 1.05rem;
+}
+
+.home-features {
+    margin-top: 45px !important;
+}
+
+.feature-card {
+    height: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #5a3a22;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.feature-card h3 {
+    margin-bottom: 15px;
+    color: #f3e4c5;
+}
+.home-description {
+    color: #4a3424;
+    font-weight: bolder;
+}
+.feature-card p {
+    color: #f3e4c5;
+}
+.home-hero .btn-primary {
+    background-color: #5a3a22;
+    border-color: #5a3a22;
+    color: #f3e4c5;
+}
+
+.home-hero .btn-primary:hover {
+    background-color: #f3e4c5;
+    border-color: #402817;
+    color: #5a3a22;
+}
+.home-hero .btn-outline-primary {
+    background-color: #f3e4c5;
+    border-color: #5a3a22;
+    color: #5a3a22;
+}
+
+.home-hero .btn-outline-primary:hover {
+    background-color: #5a3a22;
+    border-color: #5a3a22;
+    color: #f3e4c5;
+}
+
+/*---------FOOTER----------*/ 
+
+.chess-footer {
+    margin-top: 60px;
+    background: #4a3424;
+    color: #f3e4c5;
+    border-top: 1px solid rgba(243, 228, 197, 0.15);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.2);
+}
+.chess-footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+.chess-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+.chess-footer-piece {
+    font-family: "Segoe UI Symbol", "Arial Unicode MS", sans-serif;
+    font-size: 1.8rem;
+}
+.chess-footer-content p {
+    margin: 0;
+    color: #dfcba8;
+    font-size: 0.9rem;
+}
+.chess-footer-copy {
+    color: #cdb894;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+@media (max-width: 700px) {
+    .chess-footer {
+        margin-top: 40px;
+    }
+
+    .chess-footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 24px 15px;
+    }
+
+    .chess-footer-brand {
+        justify-content: center;
+    }
+}
+.site-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+    .site-body main {
+        flex: 1;
+    }
+
+
+
+
+
+
+
+
+

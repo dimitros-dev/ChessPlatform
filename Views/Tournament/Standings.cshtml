@@ -1,0 +1,98 @@
+﻿@model List<ChessPlatform.ViewModels.TournamentStandingsViewModel>
+
+@{
+    ViewData["Title"] = "Tournament Standings";
+}
+
+<link rel="stylesheet" href="~/css/app.css" />
+
+<div class="standings-page">
+
+    <div class="standings-header">
+        <div class="standings-header-icon">🏆</div>
+
+        <div>
+            <h1>Tournament Standings</h1>
+            <p style="color:#5a3a22">Current ranking and performance of tournament players.</p>
+        </div>
+    </div>
+
+    <div class="standings-card">
+
+        <table class="standings-table">
+            <thead>
+                <tr>
+                    <th class="standings-position">#</th>
+                    <th>Player</th>
+                    <th>Games</th>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    var position = 1;
+                }
+
+                @foreach (var player in Model)
+                {
+                    <tr>
+
+                        <td class="standings-position">
+                            @if (position == 1)
+                            {
+                                <span class="position-medal">🥇</span>
+                            }
+                            else if (position == 2)
+                            {
+                                <span class="position-medal">🥈</span>
+                            }
+                            else if (position == 3)
+                            {
+                                <span class="position-medal">🥉</span>
+                            }
+                            else
+                            {
+                                <span class="position-number">@position</span>
+                            }
+                        </td>
+
+                        <td class="standings-player">
+                            <span class="player-piece">♟</span>
+                            <strong>@player.PlayerName</strong>
+                        </td>
+
+                        <td>@player.GamesPlayed</td>
+
+                        <td class="stat-win">
+                            @player.Wins
+                        </td>
+
+                        <td class="stat-draw">
+                            @player.Draws
+                        </td>
+
+                        <td class="stat-loss">
+                            @player.Losses
+                        </td>
+
+                        <td class="standings-points">
+                            <strong>@player.Points</strong>
+                        </td>
+
+                    </tr>
+
+                    position++;
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

@@ -2,15 +2,77 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (User.IsInRole("Admin"))
-{
-    <h2>Admin Panel</h2>
-}
-else if (User.IsInRole("Organizer"))
-{
-    <h2>Organizer Dashboard</h2>
-}
-else if (User.IsInRole("Player"))
-{
-    <h2>Player Home</h2>
-}
+<div class="home-hero text-center">
+
+    <img src="~/images/chessLogo.jpg"
+         alt="ChessPlatform logo"
+         class="home-logo" />
+
+    <h1 class="display-3 fw-bold mt-3" style="color:#2f2117;">
+        ChessPlatform
+    </h1>
+
+    <p class="lead mt-3" style="font-weight:bold;">
+        Everything you need to organize chess tournaments.
+    </p>
+
+    <p class="home-description">
+        Create tournaments, manage players, record match results,
+        and keep track of tournament standings — all in one place.
+    </p>
+
+    @if (!User.Identity?.IsAuthenticated ?? true)
+    {
+        <div class="mt-4">
+            <a asp-controller="Account"
+               asp-action="Login"
+               class="btn btn-primary btn-lg me-2">
+                Login
+            </a>
+
+            <a asp-controller="Account"
+               asp-action="Register"
+               class="btn btn-outline-primary btn-lg">
+                Register
+            </a>
+        </div>
+    }
+
+</div>
+
+<div class="row text-center mt-5 home-features">
+
+    <div class="col-md-4 mb-4">
+        <div class="feature-card">
+            <h3>♟️ Tournaments</h3>
+
+            <p>
+                Create and manage chess tournaments,
+                set tournament details, and manage participants.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="feature-card">
+            <h3>♟️ Matches</h3>
+
+            <p>
+                Follow tournament matches and record
+                the results of each game.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="feature-card">
+            <h3>🏆 Standings & Statistics</h3>
+
+            <p>
+                Track wins, draws, losses, games played,
+                and points throughout the tournament.
+            </p>
+        </div>
+    </div>
+
+</div>

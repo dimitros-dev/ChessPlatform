@@ -1,6 +1,7 @@
 using ChessPlatform.Data;
 using ChessPlatform.Models;
 using ChessPlatform.Repositories;
+using ChessPlatform.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,8 @@ namespace ChessPlatform
             .AddDefaultTokenProviders();
 
             builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+            builder.Services.AddScoped<ITournamentService, TournamentService>();
+            builder.Services.AddScoped<IMatchService, MatchService>();
 
             var app = builder.Build();
 
@@ -45,7 +48,7 @@ namespace ChessPlatform
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Login}/{id?}")
+                pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
             using (var scope = app.Services.CreateScope())
             {

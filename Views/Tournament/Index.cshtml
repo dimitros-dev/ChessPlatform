@@ -1,73 +1,146 @@
 ﻿@model List<Tournament>
 
-    <link rel="stylesheet" href="~/css/app.css" />
+<link rel="stylesheet" href="~/css/app.css" />
 
-<div class="container mt-4">
+<div class="organizer-tournaments-page">
 
-    <h1 class="mb-3">My tournaments</h1>
+    <div class="organizer-tournaments-header">
+        <div>
+            <h1>My Tournaments</h1>
+            <p>Manage your tournaments and track their progress.</p>
+        </div>
 
-    <a asp-controller="Tournament" asp-action="Create" class="btn btn-primary mb-3">
-    Create Tournament
-    </a>
-
-    <hr />
+        <a asp-controller="Tournament"
+           asp-action="Create"
+           class="create-tournament-button">
+            + Create Tournament
+        </a>
+    </div>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info">
-            You don't have any tournaments yet.
+        <div class="empty-tournaments-card">
+            <div class="empty-icon">♟</div>
+            <h2>No tournaments yet</h2>
+            <p>You haven't created any tournaments yet.</p>
+
+            <a asp-controller="Tournament"
+               asp-action="Create"
+               class="create-tournament-button">
+                Create Your First Tournament
+            </a>
         </div>
     }
     else
     {
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var t in Model)
-                {
+        <div class="organizer-tournaments-table-container">
+
+            <table class="organizer-tournaments-table">
+                <thead>
                     <tr>
-                        <td>@t.Name</td>
-                        <td>@t.Description</td>
-                        <td>@t.StartDate.ToShortDateString()</td>
-                        <td>@t.EndDate.ToShortDateString()</td>
-                        <td>
-                            @if (!t.IsStarted)
-                            {
-                                <span class="text-warning">Not started</span>
-                            }
-                            else
-                            {
-                                <span class="text-success">Started</span>
-                            }
-                        </td>
-                        <td>
-                            <a asp-action="Delete"
-                               asp-route-id="@t.Id" class="text-danger" 
-                               onclick="return confirm('Delete this tournament?')">
-                                Delete
-                            </a>
-                        
-                        @if (!t.IsStarted)
-                        {
-                            <a asp-action="Start"
-                               asp-route-id="@t.Id"
-                               class="btn btn-sm btn-success ms-2">
-                                Start
-                            </a>
-                        }
-                        </td>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Tournament Type</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
-                   
-                }
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var t in Model)
+                    {
+                        <tr>
+
+                            <td class="tournament-name-cell">
+                                <strong>@t.Name</strong>
+                            </td>
+
+                            <td class="tournament-description-cell">
+                                @t.Description
+                            </td>
+
+                            <td class="tournament-type-cell">
+
+                                @if (t.TournamentType == "Classical")
+                                {
+                                    <span class="tournament-type-icon"
+                                          title="Classical">🐢</span>
+                                }
+                                else if (t.TournamentType == "Rapid")
+                                {
+                                    <span class="tournament-type-icon"
+                                          title="Rapid">🐇</span>
+                                }
+                                else if (t.TournamentType == "Blitz")
+                                {
+                                    <span class="tournament-type-icon"
+                                          title="Blitz">⚡</span>
+                                }
+                                else if (t.TournamentType == "Bullet")
+                                {
+                                    <span class="tournament-type-icon"
+                                          title="Bullet">🔫</span>
+                                }
+
+                                <span class="tournament-type-name">
+                                    @t.TournamentType
+                                </span>
+
+                            </td>
+                            <td>
+                                @t.StartDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @t.EndDate.ToShortDateString()
+                            </td>
+                            <td>
+
+                                @if (!t.IsStarted)
+                                {
+                                    <span class="tournament-status not-started">
+                                        Not started
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="tournament-status started">Started</span>                               
+                                }
+                            </td>
+                            <td class="tournament-actions">
+
+                                @if (!t.IsStarted)
+                                {
+                                    <form asp-action="Start" method="post" class="d-inline"> 
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@t.Id" />
+                                        <button type="submit" class="tournament-action-button start-button">Start</button>                                                                                                                                  
+                                    </form>
+                                }
+
+                                <a asp-controller="Tournament" asp-action="Standings" asp-route-id="@t.Id" class="tournament-action-button standings-button">                                                                
+                                    Standings
+                                </a>
+
+                                <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Delete this tournament?')">   
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@t.Id" />                                                                                   
+                                    <button type="submit" class="tournament-action-button delete-button">Delete</button>                                                                                                                  
+                                </form>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
     }
+
 </div>
+
